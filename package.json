@@ -1,0 +1,13 @@
+{
+  "name": "catmouse",
+  "version": "0.0.1",
+  "private": true,
+  "author": "Eric Liang <etlgfx@gmail.com>",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.4.2",
+    "jade": "*"
+  }
+}
