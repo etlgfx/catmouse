@@ -1,6 +1,9 @@
 body {
   padding: 50px;
   font: 14px sans-serif;
+  text-align: center;
+  background: black;
+  color: #eee;
 }
 
 a {
@@ -8,7 +11,25 @@ a {
 }
 
 #cat {
+	position: relative;
+	top: 0; left: 0;
 	width: 1046px;
 	height: 662px;
 	background: black;
+	margin: 0 auto;
+}
+
+#cat p.hint {
+	position: absolute;
+	top: 45%;
+	width: 100%;
+	text-align: center;
+	display: block;
+}
+
+#cat p.wait {
+	position: absolute;
+	display: none;
+	width: 200px;
+	text-align: center;
 }

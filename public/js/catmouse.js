@@ -1,74 +1,76 @@
+var STATE_MOVING = 1,
+	STATE_WAITING = 2,
+	STATE_DISPLAY = 3;
+
 var cat = null,
-	data = [],
 	coords = [],
 	lastCoords = [],
-	still = 0;
+	state = STATE_MOVING,
+	timeout = null;
 
 function move(e) {
-	if (coords) {
-		lastCoords = [coords[0], coords[1]];
-	}
-	coords = [e.clientX, e.clientY];
+	coords[0] = e.offsetX;
+	coords[1] = e.offsetY;
+	changeState(STATE_MOVING);
+
+	clearTimeout(timeout);
+	timeout = setTimeout(catchit, 1000);
 }
 
 function catchit() {
-	if (coords[0] == lastCoords[0] && coords[1] == lastCoords[1]) {
-		still++;
-	}
-	else {
-		still = 0;
-	}
+	if (coords.length == 2 && coords[0] && coords[1]) {
+		changeState(STATE_WAITING);
 
-	if (still === 3) {
-		var closest = null;
-		data.forEach(function (cat) {
-			var dx = coords[0] - cat.coords[0];
-			var dy = coords[1] - cat.coords[1];
-			cat.d = dx * dx + dy * dy;
-
-			if (!closest) {
-				closest = cat;
-			}
-			else {
-				if (cat.d < closest.d) {
-					closest = cat;
-				}
-			}
+		loadCat(coords, function (closest) {
+			changeState(STATE_DISPLAY);
+			cat.style.background = 'url(images/'+ closest.filename +')';
 		});
-
-		cat.style.background = 'url(images/'+ closest.filename +')';
 	}
 }
 
-function loadData() {
+function loadCat(coords, callback) {
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', './data.csv');
+	xhr.open('POST', '/cats');
 	xhr.addEventListener('readystatechange', function () {
 		if (this.readyState === 4 && this.status === 200) {
-			this.responseText.split('\n').forEach(function (line) {
-				if (!line) {
-					return;
-				}
-
-				var line = line.split('	');
-
-				data.push({
-					filename: line[0],
-					coords: line[1].split('x').map(function (v) {
-						return parseInt(v)
-					})
-				});
-			});
+			try {
+				var data = JSON.parse(this.responseText);
+				callback(data);
+			}
+			catch (e) { }
 		}
 	}, true);
-	xhr.send(null);
+
+	var args = new FormData();
+	args.append('x', coords[0]);
+	args.append('y', coords[1]);
+	xhr.send(args);
+}
+
+function changeState(state) {
+	switch (state) {
+		case STATE_MOVING:
+			document.querySelector('#cat p.hint').style.display = 'none';
+			cat.style.background = 'black';
+			break;
+
+		case STATE_WAITING:
+			var wait = document.querySelector('#cat p.wait');
+			wait.style.display = 'block';
+			wait.style.left = coords[0];
+			wait.style.top = coords[1];
+			break;
+
+		case STATE_DISPLAY:
+			document.querySelector('#cat p.wait').style.display = 'none';
+			break;
+	}
 }
 
 function init() {
 	cat = document.getElementById('cat');
 	cat.addEventListener('mousemove', move, true);
-	loadData();
-	setInterval(catchit, 100);
+	catchit();
 }
 
 window.addEventListener('load', function () {
