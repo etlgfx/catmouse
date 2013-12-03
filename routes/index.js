@@ -2,7 +2,7 @@ var express = require('express'),
 	mongo = require('../lib/mongo');
 
 exports.index = function(req, res) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Cat & Mouse' });
 };
 
 exports.cats = function(req, res) {

@@ -13,9 +13,11 @@ a {
 #cat {
 	position: relative;
 	top: 0; left: 0;
-	width: 1046px;
-	height: 662px;
+	width: 946px;
+	height: 562px;
 	background: black;
+	/*background-size: 1046px 662px;*/
+
 	margin: 0 auto;
 }
 

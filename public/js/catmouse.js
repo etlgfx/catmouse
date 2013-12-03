@@ -6,7 +6,10 @@ var cat = null,
 	coords = [],
 	lastCoords = [],
 	state = STATE_MOVING,
-	timeout = null;
+	timeout = null,
+	multiplier = 1,
+	size = 1,
+	correction = 50;
 
 function move(e) {
 	coords[0] = e.offsetX;
@@ -18,12 +21,27 @@ function move(e) {
 }
 
 function catchit() {
+	/*-----------
+	 *   100
+	 *
+	 *     ---------------
+	 * 100 | 100
+	 *     |
+	 * |----
+	 */
 	if (coords.length == 2 && coords[0] && coords[1]) {
 		changeState(STATE_WAITING);
 
 		loadCat(coords, function (closest) {
+			var catCoords = [size * closest.coords[0], size * closest.coords[1]];
+			var imgCoords = [catCoords[0] - correction, catCoords[1] - correction];
+			var offset = [(imgCoords[0] - catCoords[0]) + Math.max(-correction, Math.min(correction, coords[0] - imgCoords[0])), (imgCoords[1] - catCoords[1]) + Math.max(-correction, Math.min(correction, coords[1] - imgCoords[1]))];
+
+			console.log(catCoords, imgCoords, offset);
+
 			changeState(STATE_DISPLAY);
 			cat.style.background = 'url(images/'+ closest.filename +')';
+			cat.style.backgroundPosition = offset[0] +'px '+ offset[1] +'px';
 		});
 	}
 }
@@ -31,6 +49,7 @@ function catchit() {
 function loadCat(coords, callback) {
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', '/cats');
+	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.addEventListener('readystatechange', function () {
 		if (this.readyState === 4 && this.status === 200) {
 			try {
@@ -41,10 +60,7 @@ function loadCat(coords, callback) {
 		}
 	}, true);
 
-	var args = new FormData();
-	args.append('x', coords[0]);
-	args.append('y', coords[1]);
-	xhr.send(args);
+	xhr.send(JSON.stringify({'x': multiplier * coords[0] / size, 'y': multiplier * coords[1] / size}));
 }
 
 function changeState(state) {
@@ -69,6 +85,9 @@ function changeState(state) {
 
 function init() {
 	cat = document.getElementById('cat');
+	multiplier = Number(cat.getAttribute('data-size')) / cat.clientWidth;
+	size = Number(cat.getAttribute('data-size'));
+
 	cat.addEventListener('mousemove', move, true);
 	catchit();
 }
