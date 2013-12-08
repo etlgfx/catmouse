@@ -1,7 +1,12 @@
 extends layout
 
 block content
-  h1 Cat and Mouse
   #cat(data-size=1046)
-    p.hint move your mouse
-    p.wait hold still!
+    div.hint
+      h2 Piccsy Playground Presents
+      h1 Cat & Mouse
+      p Point your mouse anywhere inside this window
+    div.wait
+      p Finding Mouse... Hold Still!
+      div.progress
+        div.bar

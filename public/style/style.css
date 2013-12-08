@@ -1,13 +1,18 @@
+html, body {
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
 body {
-  padding: 50px;
-  font: 14px sans-serif;
-  text-align: center;
-  background: black;
-  color: #eee;
+	padding: 100px 50px;
+	font: 14px sans-serif;
+	text-align: center;
+	background: rgb(171,229,224);
+	color: rgb(255, 255, 255);
 }
 
 a {
-  color: #00B7FF;
+	color: #00B7FF;
 }
 
 #cat {
@@ -16,22 +21,119 @@ a {
 	width: 946px;
 	height: 562px;
 	background: black;
-	/*background-size: 1046px 662px;*/
-
 	margin: 0 auto;
+	z-index: 2;
+	/*
+	border: 5px solid rgba(255, 255, 255, 0.5);
+	border-radius: 10px;
+	*/
 }
 
-#cat p.hint {
+#cat > * {
+	pointer-events: none;
+}
+
+#cat div.hint {
 	position: absolute;
-	top: 45%;
+	top: 30%;
 	width: 100%;
 	text-align: center;
 	display: block;
 }
 
-#cat p.wait {
+h1 {
+	font-family: helvetica, sans-serif;
+	font-size: 90px;
+	line-height: 90px;
+	margin: 20px auto 30px;
+	padding: 0;
+}
+h2 {
+	text-transform: uppercase;
+	font-size: 10px;
+	font-family: helvetica, sans-serif;
+	padding: 0;
+	margin: 0 auto;
+	font-weight: normal;
+	text-indent: -10000px;
+	background: url(/gfx/piccsy.png) no-repeat 50% 50%;
+	height: 10px;
+	width: 209px;
+}
+
+#cat div.wait {
 	position: absolute;
 	display: none;
 	width: 200px;
 	text-align: center;
+	top: 43%;
+	width: 100%;
+}
+
+.progress {
+	width: 290px;
+	height: 10px;
+	border-radius: 10px;
+	background: rgb(28, 28, 28);
+	text-align: left;
+	margin: 20px auto;
+}
+
+.progress .bar {
+	display: block;
+	background: rgb(171, 229, 224);
+	border-radius: 10px;
+	width: 100px;
+	height: 10px;
+	transition: width 0.3s;
+}
+
+
+#cat p {
+	margin: 0;
+	font-family: helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.cloud {
+	position: absolute;
+	display: block;
+	z-index: 1;
+}
+
+.cloud1 {
+	background: url(/gfx/cloud1.png);
+	width: 280px;
+	height: 143px;
+}
+
+.cloud1cat {
+	background: url(/gfx/cloud1cat.png);
+	width: 280px;
+	height: 143px;
+}
+
+.cloud2 {
+	background: url(/gfx/cloud2.png);
+	width: 280px;
+	height: 145px;
+}
+
+.cloud2cat {
+	background: url(/gfx/cloud2cat.png);
+	width: 280px;
+	height: 145px;
+}
+
+.cloud3 {
+	background: url(/gfx/cloud3.png);
+	width: 185px;
+	height: 122px;
+}
+
+.cloud4 {
+	background: url(/gfx/cloud4.png);
+	width: 185px;
+	height: 122px;
 }

@@ -1,0 +1,1 @@
+{ "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "ns" : "catmouse.cats", "name" : "_id_" }, { "v" : 1, "key" : { "coords" : "2d" }, "ns" : "catmouse.cats", "name" : "coords_2d" } ] }
