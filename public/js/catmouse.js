@@ -9,7 +9,8 @@ var cat = null,
 	multiplier = 1,
 	size = 1,
 	correction = 50,
-    waitTimeout = null;
+    waitTimeout = null,
+	cats = 0;
 
 function move(e) {
 	if (Math.abs(e.layerX - coords[0]) < 5 && Math.abs(e.layerY - coords[1]) < 5) {
@@ -62,6 +63,12 @@ function loadCat(coords, callback) {
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.addEventListener('readystatechange', function () {
 		if (this.readyState === 4 && this.status === 200) {
+			cats++;
+
+			if (cats > 2) {
+				document.getElementById('social').style.visibility = 'visible';
+			}
+
 			try {
 				var data = JSON.parse(this.responseText);
 				callback(data);
@@ -77,6 +84,8 @@ function changeState(state) {
 	switch (state) {
 		case STATE_MOVING:
 			document.querySelector('#cat .hint').style.display = 'block';
+			document.querySelector('#cat .wait').style.display = 'none';
+            document.querySelector('.progress .bar').style.width = '0px';
 			cat.style.background = 'black';
 			break;
 
@@ -90,7 +99,7 @@ function changeState(state) {
 
 		case STATE_DISPLAY:
 			document.querySelector('#cat .wait').style.display = 'none';
-            document.querySelector('.progress .bar').style.width = '0';
+            document.querySelector('.progress .bar').style.width = '0px';
 			break;
 	}
 }
@@ -109,13 +118,13 @@ function clouds() {
         clds[i].style.left = (parseFloat(clds[i].style.left) + 2 - parseFloat(clds[i].style.top) / window.innerHeight) + "px";
     }
 
-    if (clds.length < 8) {
+    if (clds.length < 12) {
         var cld = document.body.appendChild(document.createElement('div'));
         cld.classList.add('cloud');
         cld.classList.add(cloudClasses[Math.floor(Math.random() * cloudClasses.length)]);
 
         var y = (Math.random() * window.innerHeight);
-        var s = (Math.random() * 0.5 + 1 - y / window.innerHeight) * 0.6667;
+        var s = (Math.random() * 0.5 + 1.5 - y / window.innerHeight) * 0.6667;
         cld.style.top = y + "px";
         cld.style.left = -(Math.random() * window.innerWidth + 300) + "px";
         cld.style.webkitTransform = "scale("+ s +")";

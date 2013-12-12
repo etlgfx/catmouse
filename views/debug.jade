@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  ul
+    for cat in cats
+      li(style="text-align: left;")
+        div
+          = cat.filename
+        div(style="position:relative;top:0;left:0;")
+          img(src="/images/#{cat.filename}")
+          div(style="position: absolute; top: "+ 1046 * cat.coords[1] +"px; left: "+ 1046 * cat.coords[0] +"px; width: 10px; height: 10px; border-radius: 10px; border: 2px solid red; background: rgba(0, 0, 0, 0.5);")
+  script(type='text/javascript', src='/js/fix.js')
