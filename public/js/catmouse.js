@@ -27,14 +27,13 @@ function move(e) {
 	clearTimeout(timeout);
 	clearTimeout(waitTimeout);
 
-    waitTimeout = setTimeout(wait, 300);
-	timeout = setTimeout(catchit, 700);
+    waitTimeout = setTimeout(wait, 400);
+	timeout = setTimeout(catchit, 1100);
 }
 
 function wait() {
     changeState(STATE_WAITING);
-
-    document.querySelector('.progress .bar').style.width = '30%';
+    setTimeout("document.querySelector('.progress .bar').style.width = '30%'", 1);
 }
 
 function catchit() {
@@ -90,16 +89,12 @@ function changeState(state) {
 			break;
 
 		case STATE_WAITING:
-			var wait = document.querySelector('#cat .wait');
 			document.querySelector('#cat .hint').style.display = 'none';
-			wait.style.display = 'block';
-			wait.style.left = coords[0];
-			wait.style.top = coords[1];
+			document.querySelector('#cat .wait').style.display = 'block';
 			break;
 
 		case STATE_DISPLAY:
 			document.querySelector('#cat .wait').style.display = 'none';
-            document.querySelector('.progress .bar').style.width = '0px';
 			break;
 	}
 }

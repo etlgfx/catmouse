@@ -7,8 +7,14 @@ body {
 	padding: 50px 50px;
 	font: 14px sans-serif;
 	text-align: center;
-	background: rgb(171,229,224);
+	background: rgb(171, 229, 224);
 	color: rgb(255, 255, 255);
+
+	background-image: -webkit-linear-gradient(top, rgb(171, 229, 224), rgb(136, 189, 184)); /* For Chrome and Safari */
+	background-image:    -moz-linear-gradient(top, rgb(171, 229, 224), rgb(136, 189, 184)); /* For old Fx (3.6 to 15) */
+	background-image:     -ms-linear-gradient(top, rgb(171, 229, 224), rgb(136, 189, 184)); /* For pre-releases of IE 10*/
+	background-image:      -o-linear-gradient(top, rgb(171, 229, 224), rgb(136, 189, 184)); /* For old Opera (11.1 to 12.0) */ 
+	background-image:         linear-gradient(to bottom, rgb(171, 229, 224), rgb(136, 189, 184)); /* Standard syntax; must be last */
 }
 
 a {
@@ -28,8 +34,15 @@ a {
 
 #social ul li {
 	display: inline-block;
-	margin: 0.5em 1em;
+	margin: 0.5em 0.5em;
 	padding: 0;
+}
+
+#social ul li.st {
+	margin-right: 0;
+}
+#social ul li.st {
+	margin-left: -0.7em;
 }
 
 #cat {
@@ -102,7 +115,7 @@ h2 {
 	border-radius: 10px;
 	width: 100px;
 	height: 10px;
-	transition: width 0.3s;
+	transition: width 0.5s;
 }
 
 
