@@ -1,6 +1,7 @@
 html, body {
 	overflow-x: hidden;
 	overflow-y: auto;
+	min-height: 100%;
 }
 
 body {
@@ -24,6 +25,7 @@ a {
 #social {
 	visibility: hidden;
 	z-index: 3;
+	height: 37px;
 }
 
 #social ul {
@@ -38,14 +40,9 @@ a {
 	padding: 0;
 }
 
-#social ul li.st {
-	margin-right: 0;
-}
-#social ul li.st {
-	margin-left: -0.7em;
-}
-
 #cat {
+	cursor: url(/gfx/Cursor.cur), auto;
+
 	position: relative;
 	top: 0; left: 0;
 	width: 946px;
