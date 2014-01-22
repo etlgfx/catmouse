@@ -9,7 +9,7 @@ function init() {
                 var xhr = new XMLHttpRequest();
                 xhr.open('POST', '/fix');
                 xhr.setRequestHeader('Content-type', 'application/json');
-                xhr.send(JSON.stringify({filename: matches[1], x: evt.layerX / 1046, y: evt.layerY / 1046}));
+                xhr.send(JSON.stringify({filename: matches[1], x: evt.layerX / 1046, y: evt.layerY / 1046, realX: evt.layerX, realY: evt.layerY}));
             }
         }, true);
     }

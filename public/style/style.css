@@ -126,7 +126,7 @@ h2 {
 .cloud {
 	position: absolute;
 	display: block;
-	z-index: 1;
+	z-index: -1;
 }
 
 .cloud1 {
@@ -163,4 +163,8 @@ h2 {
 	background: url(/gfx/cloud4.png);
 	width: 185px;
 	height: 122px;
+}
+
+ul.debug {
+	color: black;
 }

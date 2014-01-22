@@ -20,5 +20,6 @@ exports.cats = function(req, res) {
 };
 
 exports.fix = function(req, res) {
+	console.log(req.body);
     mongo.updateCat(req.body);
 }
