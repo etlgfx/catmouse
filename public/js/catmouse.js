@@ -118,7 +118,7 @@ function clouds() {
         cld.classList.add('cloud');
         cld.classList.add(cloudClasses[Math.floor(Math.random() * cloudClasses.length)]);
 
-        var y = (Math.random() * window.innerHeight);
+        var y = (Math.random() * (window.innerHeight - 150));
         var s = (Math.random() * 0.5 + 1.5 - y / window.innerHeight) * 0.6667;
         cld.style.top = y + "px";
         cld.style.left = -(Math.random() * window.innerWidth + 300) + "px";

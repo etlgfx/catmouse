@@ -1,9 +1,27 @@
 doctype html
-html
+html(prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#")
   head
+    meta(name='twitter:title', content=title)
+    meta(name='twitter:description', content='Can you catch the mouse?')
+    meta(name='twitter:image', content='http://mousegrab.com/gfx/mousegrab.jpg')
+
+    meta(property="fb:app_id", content="192271934223559")
+    meta(property="og:type",   content="website")
+    meta(property="og:url",    content="http://mousegrab.com")
+    meta(property="og:title",  content=title)
+    meta(property="og:image",  content="https://mousegrab.com/gfx/mousegrab.jpg")
+
     title= title
     link(rel='stylesheet', type='text/css', href='/style/style.css')
     link(rel='icon', type='image/x-icon', href='/favicon.ico')
     script(src='/js/catmouse.js')
   body
     block content
+    footer
+      | created by&nbsp;
+      a(href='http://twitter.com/mijlodaniel', target='_blank') @mijlodaniel
+      | &nbsp;/&nbsp;
+      a(href='http://danieleckler.com', target='_blank') http://danieleckler.com
+      | &nbsp;/&nbsp;
+      a(href='http://twitter.com/etlgfx', target='_blank') @etlgfx
+
