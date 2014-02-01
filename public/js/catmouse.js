@@ -1,6 +1,8 @@
 var STATE_MOVING = 1,
 	STATE_WAITING = 2,
-	STATE_DISPLAY = 3;
+	STATE_LOADING = 3,
+	STATE_DISPLAY = 4;
+
 
 var cat = null,
 	coords = [],
@@ -47,11 +49,15 @@ function catchit() {
 			var imgCoords = [catCoords[0] - correction, catCoords[1] - correction];
 			var offset = [(imgCoords[0] - catCoords[0]) + Math.max(-correction, Math.min(correction, coords[0] - imgCoords[0])), (imgCoords[1] - catCoords[1]) + Math.max(-correction, Math.min(correction, coords[1] - imgCoords[1]))];
 
-			console.log(catCoords, imgCoords, offset, closest.filename);
-
-			changeState(STATE_DISPLAY);
-			cat.style.background = 'url(images/'+ closest.filename +')';
-			cat.style.backgroundPosition = offset[0] +'px '+ offset[1] +'px';
+			//console.log(catCoords, imgCoords, offset, closest.filename);
+			changeState(STATE_LOADING);
+			var image = new Image();
+			image.onload = function () {
+				changeState(STATE_DISPLAY);
+				cat.style.background = 'url(images/'+ closest.filename +')';
+				cat.style.backgroundPosition = offset[0] +'px '+ offset[1] +'px';
+			};
+			image.src = 'images/'+ closest.filename;
 		});
 	}
 }
@@ -82,19 +88,29 @@ function loadCat(coords, callback) {
 function changeState(state) {
 	switch (state) {
 		case STATE_MOVING:
-			document.querySelector('#cat .hint').style.display = 'block';
-			document.querySelector('#cat .wait').style.display = 'none';
-            document.querySelector('.progress .bar').style.width = '0px';
+			document.querySelector('#cat .hint').style.display    = 'block';
+			document.querySelector('#cat .wait').style.display    = 'none';
+			document.querySelector('#cat .loading').style.display = 'none';
+            document.querySelector('.progress .bar').style.width  = '0px';
 			cat.style.background = 'black';
 			break;
 
 		case STATE_WAITING:
-			document.querySelector('#cat .hint').style.display = 'none';
-			document.querySelector('#cat .wait').style.display = 'block';
+			document.querySelector('#cat .hint').style.display    = 'none';
+			document.querySelector('#cat .wait').style.display    = 'block';
+			document.querySelector('#cat .loading').style.display = 'none';
+			break;
+
+		case STATE_LOADING:
+			document.querySelector('#cat .hint').style.display    = 'none';
+			document.querySelector('#cat .wait').style.display    = 'none';
+			document.querySelector('#cat .loading').style.display = 'block';
 			break;
 
 		case STATE_DISPLAY:
-			document.querySelector('#cat .wait').style.display = 'none';
+			document.querySelector('#cat .wait').style.display    = 'none';
+			document.querySelector('#cat .wait').style.display    = 'none';
+			document.querySelector('#cat .loading').style.display = 'none';
 			break;
 	}
 }
@@ -134,7 +150,7 @@ function init() {
 	multiplier = Number(cat.getAttribute('data-size')) / cat.clientWidth;
 	size = Number(cat.getAttribute('data-size'));
 
-    window.requestAnimationFrame(clouds);
+    //window.requestAnimationFrame(clouds);
 	cat.addEventListener('mousemove', move, true);
 	catchit();
 }

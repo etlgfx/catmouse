@@ -14,14 +14,18 @@ html(prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.
     title= title
     link(rel='stylesheet', type='text/css', href='/style/style.css')
     link(rel='icon', type='image/x-icon', href='/favicon.ico')
-    script(src='/js/catmouse.js')
+    script(src='/js/catmouse.js?v=1')
   body
     block content
     footer
-      | created by&nbsp;
-      a(href='http://twitter.com/mijlodaniel', target='_blank') @mijlodaniel
-      | &nbsp;/&nbsp;
-      a(href='http://danieleckler.com', target='_blank') http://danieleckler.com
-      | &nbsp;/&nbsp;
-      a(href='http://twitter.com/etlgfx', target='_blank') @etlgfx
+      p
+        | created by&nbsp;
+        a(href='http://twitter.com/mijlodaniel', target='_blank') @mijlodaniel
+        | &nbsp;/&nbsp;
+        a(href='http://danieleckler.com', target='_blank') http://danieleckler.com
+      p
+        | design by &nbsp;
+        a(href='http://twitter.com/glennmichael_', target='_blank') @glennmichael_
+        | &nbsp;/&nbsp;dev by &nbsp;
+        a(href='http://twitter.com/etlgfx', target='_blank') @etlgfx
 
