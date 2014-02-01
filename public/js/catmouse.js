@@ -129,7 +129,7 @@ function clouds() {
         clds[i].style.left = (parseFloat(clds[i].style.left) + 2 - parseFloat(clds[i].style.top) / window.innerHeight) + "px";
     }
 
-    if (clds.length < 12) {
+    if (clds.length < 11) {
         var cld = document.body.appendChild(document.createElement('div'));
         cld.classList.add('cloud');
         cld.classList.add(cloudClasses[Math.floor(Math.random() * cloudClasses.length)]);
@@ -150,7 +150,7 @@ function init() {
 	multiplier = Number(cat.getAttribute('data-size')) / cat.clientWidth;
 	size = Number(cat.getAttribute('data-size'));
 
-    //window.requestAnimationFrame(clouds);
+    window.requestAnimationFrame(clouds);
 	cat.addEventListener('mousemove', move, true);
 	catchit();
 }
